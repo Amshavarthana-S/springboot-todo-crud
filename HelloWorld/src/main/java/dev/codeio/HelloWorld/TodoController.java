@@ -34,7 +34,10 @@ ResponseEntity<List<Todo>> getTodos(){
 
     // Create Todo using POST (JSON body)
     @PostMapping("/create")
-    ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
+    ResponseEntity<?> createTodo(@RequestBody Todo todo) {
+        if(todo.getTitle()==null||todo.getTitle().trim().isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Todo title cannot be empty");
+        }
         Todo createdTodo = todoService.createTodo(todo);
         return new ResponseEntity<>(createdTodo, HttpStatus.CREATED);
     }

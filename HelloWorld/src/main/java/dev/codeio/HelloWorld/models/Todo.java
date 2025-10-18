@@ -12,10 +12,10 @@ import lombok.Data;
 public class Todo {
     @Id
     @GeneratedValue
-    Long id;
-String title;
-String Description;
-Boolean isCompleted;
+  private   Long id;
+private String title;
+private String Description;
+private Boolean isCompleted;
 
 
 }
