@@ -1,9 +1,9 @@
-package dev.codeio.HelloWorld;
+package dev.codeio.HelloWorld.controller;
 
+import dev.codeio.HelloWorld.service.TodoService;
 import dev.codeio.HelloWorld.models.Todo;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.validation.Validator;
 import java.util.List;
 
 @RestController

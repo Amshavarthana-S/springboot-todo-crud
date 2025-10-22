@@ -1,4 +1,4 @@
-package dev.codeio.HelloWorld;
+package dev.codeio.HelloWorld.repository;
 
 
 import dev.codeio.HelloWorld.models.Todo;

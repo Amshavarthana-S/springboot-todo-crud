@@ -1,4 +1,4 @@
-package dev.codeio.HelloWorld;
+package dev.codeio.HelloWorld.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,9 +1,9 @@
-package dev.codeio.HelloWorld;
+package dev.codeio.HelloWorld.service;
 
 import dev.codeio.HelloWorld.models.Todo;
 
+import dev.codeio.HelloWorld.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
