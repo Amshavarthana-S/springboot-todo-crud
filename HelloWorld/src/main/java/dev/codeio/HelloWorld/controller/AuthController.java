@@ -10,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class AuthController {
 private final UserService userService;
     private final UserRepository userRepository;
@@ -24,7 +26,7 @@ private final UserService userService;
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String,String> body){
             String email=body.get("email");
-            String password= body.get("password");
+            String password= passwordEncoder.encode(body.get("password"));
             if(userRepository.findByEmail(email).isPresent()){
                 return new ResponseEntity<>("Email already exists",HttpStatus.CONFLICT);
             }
@@ -32,7 +34,7 @@ private final UserService userService;
             return new ResponseEntity<>("Successfully registerd",HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String,String> body){
+    public ResponseEntity loginUser(@RequestBody Map<String,String> body){
         String email=body.get("email");
         String password= body.get("password");
 
@@ -42,7 +44,7 @@ private final UserService userService;
 
                 }
                 User user=userOptional.get();
-                if(passwordEncoder.matches(password,user.getPassword())){
+                if(!passwordEncoder.matches(password,user.getPassword())){
                     return new ResponseEntity<>("Invalid User",HttpStatus.UNAUTHORIZED);
                 }
                 String token=jwtUtil.generateToken(email);
