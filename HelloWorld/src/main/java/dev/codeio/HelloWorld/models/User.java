@@ -19,9 +19,12 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue
-    long id;
-    @Email
-    String email;
-    String password;
+    private long id;
 
+    @Email(message = "Email must be valid")
+    @jakarta.validation.constraints.NotBlank(message = "Email is required")
+    private String email;
+
+    @jakarta.validation.constraints.NotBlank(message = "Password is required")
+    private String password;
 }

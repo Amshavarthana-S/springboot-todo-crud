@@ -34,33 +34,29 @@ function login() {
 
 // ===== REGISTER =====
 function register() {
-    const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    if (!name || !email || !password) {
-        alert("Please fill all fields.");
+    if (!email || !password) {
+        alert("Please enter both email and password.");
         return;
     }
 
     fetch(`${SERVER_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ email, password })
     })
-    .then(res => {
-        if (!res.ok) return res.text().then(text => { throw new Error(text || "Registration failed") });
-        return res.text().then(text => text ? JSON.parse(text) : null);
-    })
-    .then(data => {
-        alert("Registration successful! Please login.");
+    .then(res => res.text())
+    .then(text => {
+        alert(text);
         window.location.href = "login.html";
     })
     .catch(err => {
-        alert(err.message);
+        console.error(err);
+        alert("Something went wrong. Check console for details.");
     });
 }
-
 
 // ===== TODOS =====
 function createTodoCard(todo) {
